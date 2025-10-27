@@ -58,18 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['slett'])) {
         $brukernavn = escapeString($conn, $_POST['brukernavn']);
         
-        $sql = "DELETE FROM student WHERE brukernavn = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $brukernavn);
-        
-        if ($stmt->execute()) {
+        try {
+            $sql = "DELETE FROM student WHERE brukernavn = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $brukernavn);
+            $stmt->execute();
             $melding = "Student '$brukernavn' ble slettet.";
             $melding_type = "success";
-        } else {
-            $melding = "Feil ved sletting: " . $conn->error;
+            $stmt->close();
+        } catch (mysqli_sql_exception $e) {
+            $melding = "Feil ved sletting: " . $e->getMessage();
             $melding_type = "error";
         }
-        $stmt->close();
     }
     
     closeDbConnection($conn);

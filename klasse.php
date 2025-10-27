@@ -68,18 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $melding = "Kan ikke slette klasse '$klassekode' - det finnes $count student(er) i denne klassen.";
             $melding_type = "error";
         } else {
-            $sql = "DELETE FROM klasse WHERE klassekode = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $klassekode);
-            
-            if ($stmt->execute()) {
+            try {
+                $sql = "DELETE FROM klasse WHERE klassekode = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $klassekode);
+                $stmt->execute();
                 $melding = "Klasse '$klassekode' ble slettet.";
                 $melding_type = "success";
-            } else {
-                $melding = "Feil ved sletting: " . $conn->error;
+                $stmt->close();
+            } catch (mysqli_sql_exception $e) {
+                if ($conn->errno == 1451) {
+                    $melding = "Kan ikke slette klasse '$klassekode' - det finnes studenter i denne klassen.";
+                } else {
+                    $melding = "Feil ved sletting: " . $e->getMessage();
+                }
                 $melding_type = "error";
             }
-            $stmt->close();
         }
     }
     

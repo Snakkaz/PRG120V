@@ -50,22 +50,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['slett_klasse'])) {
         $klassekode = escapeString($conn, $_POST['klassekode']);
         
-        $sql = "DELETE FROM klasse WHERE klassekode = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $klassekode);
-        
-        if ($stmt->execute()) {
+        try {
+            $sql = "DELETE FROM klasse WHERE klassekode = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $klassekode);
+            $stmt->execute();
             $melding = "Klasse '$klassekode' ble slettet!";
             $melding_type = "success";
-        } else {
+            $stmt->close();
+        } catch (mysqli_sql_exception $e) {
             if ($conn->errno == 1451) {
                 $melding = "Kan ikke slette klasse '$klassekode' - det finnes studenter i denne klassen.";
             } else {
-                $melding = "Feil ved sletting: " . $conn->error;
+                $melding = "Feil ved sletting: " . $e->getMessage();
             }
             $melding_type = "error";
         }
-        $stmt->close();
         closeDbConnection($conn);
     }
     
@@ -109,18 +109,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['slett_student'])) {
         $brukernavn = escapeString($conn, $_POST['brukernavn']);
         
-        $sql = "DELETE FROM student WHERE brukernavn = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $brukernavn);
-        
-        if ($stmt->execute()) {
+        try {
+            $sql = "DELETE FROM student WHERE brukernavn = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $brukernavn);
+            $stmt->execute();
             $melding = "Student '$brukernavn' ble slettet!";
             $melding_type = "success";
-        } else {
-            $melding = "Feil ved sletting: " . $conn->error;
+            $stmt->close();
+        } catch (mysqli_sql_exception $e) {
+            $melding = "Feil ved sletting: " . $e->getMessage();
             $melding_type = "error";
         }
-        $stmt->close();
         closeDbConnection($conn);
     }
 }
