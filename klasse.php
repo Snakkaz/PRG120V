@@ -32,22 +32,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $melding = "Alle felt må fylles ut.";
             $melding_type = "error";
         } else {
-            $sql = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES (?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sss", $klassekode, $klassenavn, $studiumkode);
-            
-            if ($stmt->execute()) {
+            try {
+                $sql = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES (?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sss", $klassekode, $klassenavn, $studiumkode);
+                $stmt->execute();
                 $melding = "Klasse '$klassekode' ble registrert!";
                 $melding_type = "success";
-            } else {
+                $stmt->close();
+            } catch (mysqli_sql_exception $e) {
                 if ($conn->errno == 1062) {
                     $melding = "Klasse med kode '$klassekode' eksisterer allerede.";
                 } else {
-                    $melding = "Feil ved registrering: " . $conn->error;
+                    $melding = "Feil ved registrering: " . $e->getMessage();
                 }
                 $melding_type = "error";
             }
-            $stmt->close();
         }
     }
     
