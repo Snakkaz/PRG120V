@@ -19,8 +19,8 @@ Dette prosjektet er en løsning på PRG120V-oppgaven som innebærer å lage et s
 ### Database-informasjon
 - **Server**: b-studentsql-1.usn.no (MariaDB 10.11.14)
 - **Database**: stpet1155
-- **Bruker**: stpet1155
-- **Passord**: d991stpet1155
+- **Bruker**: 
+- **Passord**: 
 - **Administrasjon**: Tilgjengelig via phpMyAdmin
 - **Tilkobling**: TCP/IP via SSL (optional)
 
