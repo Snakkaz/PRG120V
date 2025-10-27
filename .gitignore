@@ -1,0 +1,30 @@
+# PHP
+*.log
+*.tmp
+*.cache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Trunk (already tracked)
+# .trunk/
+
+# Environment files (if you add any later)
+.env
+.env.local
+
+# Backup files
+*.bak
+*.backup
+
+# Test files
+test.php
+debug.php
