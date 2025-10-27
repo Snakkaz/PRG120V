@@ -40,7 +40,7 @@ closeDbConnection($conn);
             <a href="index.php" class="nav-link active">🏠 Hjem</a>
             <a href="klasse.php" class="nav-link">📖 Klasser</a>
             <a href="student.php" class="nav-link">👨‍🎓 Studenter</a>
-            <a href="plain.php" class="nav-link">📄 Blank</a>
+            <a href="blank.php" class="nav-link">📄 Blank</a>
         </nav>
 
         <main>
