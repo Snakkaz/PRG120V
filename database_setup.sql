@@ -8,7 +8,7 @@
 
 -- Create klasse table
 CREATE TABLE IF NOT EXISTS klasse (
-  klassekode CHAR(5) NOT NULL,
+  klassekode VARCHAR(10) NOT NULL,
   klassenavn VARCHAR(50) NOT NULL,
   studiumkode VARCHAR(50) NOT NULL,
   PRIMARY KEY (klassekode)
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS student (
   brukernavn CHAR(7) NOT NULL,
   fornavn VARCHAR(50) NOT NULL,
   etternavn VARCHAR(50) NOT NULL,
-  klassekode CHAR(5) NOT NULL,
+  klassekode VARCHAR(10) NOT NULL,
   PRIMARY KEY (brukernavn),
   FOREIGN KEY (klassekode) REFERENCES klasse(klassekode)
     ON DELETE RESTRICT
@@ -32,19 +32,18 @@ CREATE TABLE IF NOT EXISTS student (
 
 -- Sample classes
 INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES
-('IT101', 'Informasjonsteknologi 1. klasse', 'ITE'),
-('IT201', 'Informasjonsteknologi 2. klasse', 'ITE'),
-('PRG01', 'Programmering 1. semester', 'ITE'),
-('WEB01', 'Webutvikling 1. semester', 'ITE')
+('IT1', 'IT og ledelse 1. år', 'ITLED'),
+('IT2', 'IT og ledelse 2. år', 'ITLED'),
+('IT3', 'IT og ledelse 3. år', 'ITLED'),
+('PRG1', 'Programmering 1. semester', 'ITE')
 ON DUPLICATE KEY UPDATE klassekode=klassekode;
 
 -- Sample students
 INSERT INTO student (brukernavn, fornavn, etternavn, klassekode) VALUES
-('stpet11', 'Petter', 'Petterson', 'IT101'),
-('stola12', 'Ola', 'Olsen', 'IT101'),
-('stkari3', 'Kari', 'Karlsen', 'IT201'),
-('stanne4', 'Anne', 'Andersen', 'PRG01'),
-('stjohn5', 'John', 'Jensen', 'WEB01')
+('stpet11', 'Petter', 'Petterson', 'IT1'),
+('stola12', 'Ola', 'Olsen', 'IT1'),
+('stkari3', 'Kari', 'Karlsen', 'IT2'),
+('stanne4', 'Anne', 'Andersen', 'PRG1')
 ON DUPLICATE KEY UPDATE brukernavn=brukernavn;
 
 -- =====================================================

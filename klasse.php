@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $studiumkode = escapeString($conn, trim($_POST['studiumkode']));
         
         // Validering
-        if (strlen($klassekode) != 5) {
-            $melding = "Klassekode må være nøyaktig 5 tegn.";
+        if (empty($klassekode) || strlen($klassekode) > 10) {
+            $melding = "Klassekode må være mellom 1 og 10 tegn.";
             $melding_type = "error";
         } elseif (empty($klassenavn) || empty($studiumkode)) {
             $melding = "Alle felt må fylles ut.";
@@ -128,11 +128,10 @@ $result = $conn->query($sql);
                 <h2>➕ Registrer ny klasse</h2>
                 <form method="POST" action="klasse.php" class="form">
                     <div class="form-group">
-                        <label for="klassekode">Klassekode (5 tegn):</label>
-                        <input type="text" id="klassekode" name="klassekode" maxlength="5" 
-                               pattern="[A-Za-z0-9]{5}" required 
-                               placeholder="F.eks: IT101">
-                        <small>Må være nøyaktig 5 tegn (bokstaver og tall)</small>
+                        <label for="klassekode">Klassekode:</label>
+                        <input type="text" id="klassekode" name="klassekode" maxlength="10" 
+                               required placeholder="F.eks: IT1, PRG1">
+                        <small>Maks 10 tegn</small>
                     </div>
                     
                     <div class="form-group">
