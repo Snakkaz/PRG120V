@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $klassenavn = escapeString($conn, trim($_POST['klassenavn']));
         $studiumkode = escapeString($conn, trim($_POST['studiumkode']));
         
-        // Validering
-        if (empty($klassekode) || strlen($klassekode) > 10) {
-            $melding = "Klassekode må være mellom 1 og 10 tegn.";
+        // Validering - CHAR(5) kan være maks 5 tegn
+        if (empty($klassekode) || strlen($klassekode) > 5) {
+            $melding = "Klassekode må være mellom 1 og 5 tegn.";
             $melding_type = "error";
         } elseif (empty($klassenavn) || empty($studiumkode)) {
             $melding = "Alle felt må fylles ut.";
@@ -114,6 +114,7 @@ $result = $conn->query($sql);
             <a href="index.php" class="nav-link">🏠 Hjem</a>
             <a href="klasse.php" class="nav-link active">📖 Klasser</a>
             <a href="student.php" class="nav-link">👨‍🎓 Studenter</a>
+            <a href="plain.php" class="nav-link">📄 Blank</a>
         </nav>
 
         <main>
@@ -129,25 +130,26 @@ $result = $conn->query($sql);
                 <form method="POST" action="klasse.php" class="form">
                     <div class="form-group">
                         <label for="klassekode">Klassekode:</label>
-                        <input type="text" id="klassekode" name="klassekode" maxlength="10" 
-                               required placeholder="F.eks: IT1, PRG1">
-                        <small>Maks 10 tegn</small>
-                    </div>
-                    
-                    <div class="form-group">
+                        <input type="text" id="klassekode" name="klassekode"
+                               maxlength="5" required placeholder="IT1">
+                        <small>Maks 5 tegn (f.eks: IT1, IT2, PROG1)</small>
+                    </div>                    <div class="form-group">
                         <label for="klassenavn">Klassenavn:</label>
                         <input type="text" id="klassenavn" name="klassenavn" maxlength="50" 
-                               required placeholder="F.eks: Informasjonsteknologi 1. klasse">
+                               required placeholder="F.eks: IT og ledelse 1. år">
                     </div>
                     
                     <div class="form-group">
                         <label for="studiumkode">Studiumkode:</label>
                         <input type="text" id="studiumkode" name="studiumkode" maxlength="50" 
-                               required placeholder="F.eks: ITE">
+                               required placeholder="F.eks: ITLED">
                     </div>
                     
                     <button type="submit" name="opprett" class="btn btn-primary">
                         ➕ Opprett klasse
+                    </button>
+                </form>
+            </section>
                     </button>
                 </form>
             </section>

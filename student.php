@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $etternavn = escapeString($conn, trim($_POST['etternavn']));
         $klassekode = escapeString($conn, $_POST['klassekode']);
         
-        // Validering
-        if (strlen($brukernavn) != 7) {
-            $melding = "Brukernavn må være nøyaktig 7 tegn.";
+        // Validering - CHAR(7) kan være maks 7 tegn
+        if (empty($brukernavn) || strlen($brukernavn) > 7) {
+            $melding = "Brukernavn må være mellom 1 og 7 tegn.";
             $melding_type = "error";
         } elseif (empty($fornavn) || empty($etternavn) || empty($klassekode)) {
             $melding = "Alle felt må fylles ut.";
@@ -105,6 +105,7 @@ $klasser = $conn->query("SELECT klassekode, klassenavn FROM klasse ORDER BY klas
             <a href="index.php" class="nav-link">🏠 Hjem</a>
             <a href="klasse.php" class="nav-link">📖 Klasser</a>
             <a href="student.php" class="nav-link active">👨‍🎓 Studenter</a>
+            <a href="plain.php" class="nav-link">📄 Blank</a>
         </nav>
 
         <main>
@@ -121,17 +122,16 @@ $klasser = $conn->query("SELECT klassekode, klassenavn FROM klasse ORDER BY klas
                 <?php if ($klasser->num_rows > 0): ?>
                     <form method="POST" action="student.php" class="form">
                         <div class="form-group">
-                            <label for="brukernavn">Brukernavn (7 tegn):</label>
-                            <input type="text" id="brukernavn" name="brukernavn" maxlength="7" 
-                                   pattern="[a-z0-9]{7}" required 
-                                   placeholder="F.eks: stpet11">
-                            <small>Må være nøyaktig 7 tegn (små bokstaver og tall)</small>
+                            <label for="brukernavn">Brukernavn:</label>
+                            <input type="text" id="brukernavn" name="brukernavn"
+                                   maxlength="7" required placeholder="gb">
+                            <small>Maks 7 tegn (små bokstaver og tall, f.eks: gb, mrj, stpet11)</small>
                         </div>
                         
                         <div class="form-group">
                             <label for="fornavn">Fornavn:</label>
-                            <input type="text" id="fornavn" name="fornavn" maxlength="50" 
-                                   required placeholder="F.eks: Petter">
+                            <input type="text" id="fornavn" name="fornavn" maxlength="50"
+                                   required placeholder="F.eks: Geir">
                         </div>
                         
                         <div class="form-group">
