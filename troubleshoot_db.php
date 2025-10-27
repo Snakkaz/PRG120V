@@ -8,10 +8,11 @@
 
 // Mulige hostnames å teste
 $hosts_to_test = [
-    'mysql-ait.usn.no' => 'Standard USN AIT hostname',
+    'b-studentsql-1.usn.no' => 'Korrekt USN database server (fra phpMyAdmin)',
     'localhost' => 'Lokal MySQL server',
     'mysql' => 'Docker container navn',
     '127.0.0.1' => 'Loopback IP adresse',
+    'mysql-ait.usn.no' => 'Alternativ USN hostname',
     'mysql.usn.no' => 'Gammel hostname (deprecated)',
 ];
 

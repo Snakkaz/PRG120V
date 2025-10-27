@@ -8,7 +8,9 @@ getaddrinfo for mysql.usn.no failed: Name does not resolve
 
 ## ✅ Løsningen:
 
-Databasen `mysql.usn.no` eksisterer ikke. Riktig hostname er **`mysql-ait.usn.no`**.
+Databasen eksisterer på **`b-studentsql-1.usn.no`** (MariaDB 10.11.14).
+
+Dette er den korrekte hostnamet fra phpMyAdmin-informasjonen din.
 
 ### Rask Fix (Allerede gjort!)
 
@@ -30,11 +32,11 @@ Gå til: https://dokploy.usn.no/app/stpet1155-prg120v/troubleshoot_db.php
 ```
 Dette skriptet tester automatisk alle mulige hostnames og viser deg hvilken som fungerer.
 
-### Alternative Hostnames (hvis mysql-ait.usn.no ikke fungerer)
+### Alternative Hostnames (hvis b-studentsql-1.usn.no ikke fungerer)
 
 Prøv disse i rekkefølge:
 
-1. **`mysql-ait.usn.no`** - Standard for AIT-studenter (allerede satt)
+1. **`b-studentsql-1.usn.no`** - Korrekt hostname fra phpMyAdmin (allerede satt)
 2. **`localhost`** - Hvis MySQL kjører på samme server
 3. **`mysql`** - Hvis i Docker container
 4. **`127.0.0.1`** - IP loopback
@@ -63,8 +65,13 @@ define('DB_HOST', 'mysql.usn.no'); // ❌ Fungerte ikke
 
 **Etter:**
 ```php
-define('DB_HOST', 'mysql-ait.usn.no'); // ✅ Skal fungere
+define('DB_HOST', 'b-studentsql-1.usn.no'); // ✅ Korrekt hostname!
 ```
+
+**Server info fra phpMyAdmin:**
+- Server: b-studentsql-1.usn.no via TCP/IP
+- Server type: MariaDB 10.11.14
+- Connection: TCP/IP (SSL optional)
 
 ### Ekstra ressurser:
 

@@ -61,10 +61,12 @@ This complete PHP web application includes:
 ## 🗄️ Database Quick Reference
 
 **Connection Details:**
-- Host: `mysql-ait.usn.no` (or run `troubleshoot_db.php` to find correct one)
+- Host: `b-studentsql-1.usn.no` (korrekt hostname fra phpMyAdmin)
 - Database: `stpet1155`
 - User: `stpet1155`
 - Password: `d991stpet1155`
+
+**Server Info:** MariaDB 10.11.14 via TCP/IP
 
 **If connection fails:** Visit `troubleshoot_db.php` to test all hostname alternatives.
 
@@ -165,7 +167,7 @@ Show these features:
 ✅ **GitHub Repository:** https://github.com/Snakkaz/PRG120V
 ✅ **Auto-Deploy:** Configured for USN Dokploy
 ✅ **Live URL:** https://dokploy.usn.no/app/stpet1155-prg120v/
-✅ **Database:** Connected to stpet1155@mysql-ait.usn.no
+✅ **Database:** Connected to stpet1155@b-studentsql-1.usn.no (MariaDB)
 
 ## 📚 Documentation
 

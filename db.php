@@ -4,33 +4,32 @@
  * 
  * Dette skriptet håndterer tilkobling til MySQL-databasen via phpMyAdmin.
  * 
- * VIKTIG: Database hostname varierer avhengig av server-oppsett.
- * Hvis du får "Name does not resolve" feil, prøv en av disse:
+ * SERVER INFORMASJON (fra phpMyAdmin):
+ * - Server: b-studentsql-1.usn.no via TCP/IP
+ * - Server type: MariaDB 10.11.14-deb12
+ * - Protocol version: 10
+ * - Connection: TCP/IP (SSL optional)
+ * - Character set: UTF-8 Unicode (utf8mb4)
  * 
- * 1. 'mysql-ait.usn.no'  - Standard for USN AIT-studenter
- * 2. 'localhost'         - Hvis MySQL kjører på samme server som PHP
- * 3. 'mysql'             - Docker container navn (hvis i Docker)
- * 4. '127.0.0.1'         - IP loopback adresse
- * 
- * Databasedetaljer:
+ * TILKOBLINGSDETALJER:
  * - Database: stpet1155
  * - Bruker: stpet1155
  * - Passord: d991stpet1155
+ * 
+ * VIKTIG: Hvis du får "Name does not resolve" feil:
+ * 1. Kjør troubleshoot_db.php for å teste alle hostname-alternativer
+ * 2. Verifiser at serveren kan nå b-studentsql-1.usn.no
+ * 3. Prøv 'localhost' hvis MySQL er på samme server
  */
 
 // Database konfigurasjon
-// Prøv disse hostname-alternativene hvis tilkobling feiler:
-// Option 1: Standard USN hostname for AIT-studenter
-define('DB_HOST', 'mysql-ait.usn.no');
+// Riktig hostname fra phpMyAdmin: b-studentsql-1.usn.no
+define('DB_HOST', 'b-studentsql-1.usn.no');
 
-// Option 2: Hvis MySQL er på samme server (uncomment for å bruke)
-// define('DB_HOST', 'localhost');
-
-// Option 3: Docker container navn (uncomment for å bruke)
-// define('DB_HOST', 'mysql');
-
-// Option 4: IP adresse (uncomment for å bruke)
-// define('DB_HOST', '127.0.0.1');
+// Alternative hostnames hvis den over ikke fungerer:
+// define('DB_HOST', 'localhost');      // Hvis MySQL er lokal
+// define('DB_HOST', 'mysql');          // Docker container
+// define('DB_HOST', '127.0.0.1');     // IP loopback
 
 define('DB_USER', 'stpet1155');
 define('DB_PASS', 'd991stpet1155');
