@@ -25,6 +25,9 @@ echo "        </header>\n";
 echo "        <main>\n";
 echo "            <section>\n";
 echo "                <h2>Test Results</h2>\n";
+echo "                <div class='info-box warning'>\n";
+echo "                    <p>⚠️ <strong>Connection problems?</strong> If you get DNS or connection errors, use the <a href='troubleshoot_db.php'><strong>Database Troubleshooter</strong></a> to find the correct hostname.</p>\n";
+echo "                </div>\n";
 
 // Test 1: Database Connection
 echo "                <h3>1. Testing Database Connection...</h3>\n";

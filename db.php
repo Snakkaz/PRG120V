@@ -3,15 +3,35 @@
  * Database Configuration and Connection
  * 
  * Dette skriptet håndterer tilkobling til MySQL-databasen via phpMyAdmin.
+ * 
+ * VIKTIG: Database hostname varierer avhengig av server-oppsett.
+ * Hvis du får "Name does not resolve" feil, prøv en av disse:
+ * 
+ * 1. 'mysql-ait.usn.no'  - Standard for USN AIT-studenter
+ * 2. 'localhost'         - Hvis MySQL kjører på samme server som PHP
+ * 3. 'mysql'             - Docker container navn (hvis i Docker)
+ * 4. '127.0.0.1'         - IP loopback adresse
+ * 
  * Databasedetaljer:
- * - Host: mysql.usn.no
  * - Database: stpet1155
  * - Bruker: stpet1155
  * - Passord: d991stpet1155
  */
 
 // Database konfigurasjon
-define('DB_HOST', 'mysql.usn.no');
+// Prøv disse hostname-alternativene hvis tilkobling feiler:
+// Option 1: Standard USN hostname for AIT-studenter
+define('DB_HOST', 'mysql-ait.usn.no');
+
+// Option 2: Hvis MySQL er på samme server (uncomment for å bruke)
+// define('DB_HOST', 'localhost');
+
+// Option 3: Docker container navn (uncomment for å bruke)
+// define('DB_HOST', 'mysql');
+
+// Option 4: IP adresse (uncomment for å bruke)
+// define('DB_HOST', '127.0.0.1');
+
 define('DB_USER', 'stpet1155');
 define('DB_PASS', 'd991stpet1155');
 define('DB_NAME', 'stpet1155');

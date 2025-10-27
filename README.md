@@ -17,11 +17,18 @@ Dette prosjektet er en løsning på PRG120V-oppgaven som innebærer å lage et s
 ## 🗄️ Database
 
 ### Database-informasjon
-- **Server**: mysql.usn.no
+- **Server**: mysql-ait.usn.no (se troubleshooting hvis dette ikke fungerer)
 - **Database**: stpet1155
 - **Bruker**: stpet1155
 - **Passord**: d991stpet1155
 - **Administrasjon**: Tilgjengelig via phpMyAdmin
+
+**⚠️ Viktig:** Hvis du får "Name does not resolve" feil, kjør `troubleshoot_db.php` for å finne riktig hostname.
+
+**Alternative hostnames:**
+- `localhost` - Hvis MySQL kjører på samme server
+- `mysql` - For Docker container setup
+- `127.0.0.1` - IP loopback adresse
 
 ### Database-skjema
 
